@@ -5,7 +5,7 @@ import image from '../design.png'
 const LandingPage = () => {
     return (
         <div className='lan-page'>
-            <div className='container-fluid px-4 py-3 lan-page-head'>
+            <div className='container-fluid px-4 py-1 lan-page-head'>
               <span className='lan-page-head-logo'>Class Manager</span>
               <Link to='/signin' className='signin-btn'>sign in</Link>
             </div>
