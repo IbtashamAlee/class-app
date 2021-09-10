@@ -2,7 +2,7 @@
   "name": "class-orgnizer",
   "version": "0.0.0",
   "scripts": {
-    "start":"npm start",
+    "start":"vite start",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
