@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import qs from "qs";
 
@@ -8,13 +8,15 @@ const Signup = () => {
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [isTutor, setIsTutor] = useState(false);
-  const [alert, setAlert] = useState(false);
+  const [formAlert, setFormAlert] = useState(false);
+  const [userAlert, setUserAlert] = useState(false);
+  let history = useHistory();
 
   const submitHandle = (e) => {
     e.preventDefault();
 
     if (!email || !fullname || !password) {
-      setAlert(true);
+      setFormAlert(true);
     } else {
       let user = { email, password, isTutor, fullname };
 
@@ -24,16 +26,23 @@ const Signup = () => {
           "content-type": "application/x-www-form-urlencoded",
         },
         data: qs.stringify(user),
-        url: "https://dev-classorganizer.herokuapp.com/users/signup",
+        url: "/users/signup",
       })
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-
-      setAlert(false);
-      setEmail("");
-      setFullname("");
-      setPassword("");
-      setIsTutor(false);
+        .then((response) => {
+          if (response.status == 200) {
+            setEmail("");
+            setFullname("");
+            setIsTutor(false);
+            setPassword("");
+            setFormAlert(false);
+            history.push("/signin");
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            setUserAlert(true);
+          }
+        });
     }
   };
 
@@ -58,26 +67,29 @@ const Signup = () => {
         <Link to="/signin" className="link-info text-decoration-none">
           Login with existing account
         </Link>
-        {alert && (
-          <span style={{ color: "red", fontSize: "12px" }}>
+        {formAlert && (
+          <span
+            className="text-warning"
+            style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
+          >
             Please complete form
           </span>
         )}
         <form onSubmit={submitHandle}>
           <input
             className="py-2 w-75 m-3 rounded-3 border border-none"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <input
-            className="py-2 w-75 m-3 rounded-3 border border-none"
             type="text"
             placeholder="Full name"
             value={fullname}
             onChange={(e) => setFullname(e.target.value)}
+          />
+          <br />
+          <input
+            className="py-2 w-75 m-3 rounded-3 border border-none"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <br />
           <input
@@ -95,6 +107,15 @@ const Signup = () => {
             />
             <span className="text-white mx-3">I'm a teacher</span>
           </div>
+          <br />
+          {userAlert && (
+            <span
+              className="text-warning"
+              style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
+            >
+              User already exists!
+            </span>
+          )}
           <br />
           <button
             className="btn px-3 my-3 text-white fw-bold"

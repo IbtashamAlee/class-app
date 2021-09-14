@@ -1,22 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
+import qs from "qs";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false);
+  let history = useHistory();
 
   const submitHandle = (e) => {
     e.preventDefault();
 
-    console.log("email ", email);
-
     if (!email || !password) {
       setAlert(true);
     } else {
-      setAlert(false);
-      setEmail("");
-      setPassword("");
+      let user = { email, password };
+      axios({
+        method: "POST",
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+        },
+        data: qs.stringify(user),
+        url: "/users/signin",
+      })
+        .then((response) => {
+          if (response.status == 200) {
+            localStorage.setItem("access_token", response.data.access_token);
+            setEmail("");
+            setPassword("");
+            setAlert("");
+            history.push("/dashboard");
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            console.log("Not found");
+          }
+        });
     }
   };
 

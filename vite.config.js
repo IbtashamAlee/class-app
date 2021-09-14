@@ -5,11 +5,15 @@ import reactRefresh from "@vitejs/plugin-react-refresh";
 export default defineConfig({
   server: {
     proxy: {
-      // Using the proxy instance
-      "^/.*": {
+      "^/users/.*": {
         target: "https://dev-classorganizer.herokuapp.com",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/users^\/^\.*/, ""),
+      },
+      "^/classes/.*": {
+        target: "https://dev-classorganizer.herokuapp.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/classes^\/^\.*/, ""),
       },
     },
   },
