@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 import setProfile from "../redux/actions/ProfileAction";
+import setClasses from "../redux/actions/ClassAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import AddClass from "./AddClass";
@@ -12,6 +13,7 @@ const DashBoard = () => {
   const history = useHistory();
 
   let profile = useSelector((state) => state.profile);
+  let classes = useSelector((state) => state.classes);
 
   useEffect(() => {
     axios({
@@ -42,11 +44,11 @@ const DashBoard = () => {
         "content-type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
-      url: "/classes",
+      url: "/classes/",
     })
       .then((response) => {
         if (response.status == 200) {
-          console.log(response);
+          dispatch(setClasses(response.data));
         }
       })
       .catch((err) => {
