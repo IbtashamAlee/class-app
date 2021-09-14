@@ -67,7 +67,7 @@ const DashBoard = () => {
       {addForm && <AddClass addClass={addClass} />}
       <div>
         <Header addClass={addClass} />
-        <div></div>
+        <div className="continer"></div>
       </div>
     </>
   );
