@@ -6,8 +6,8 @@ import ErrorPage from "./components/ErrorPage";
 import LandingPage from "./components/LandingPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import PrivateRoute from "./routes/PrivateRoute";
+import ClassDetails from "./components/ClassDetails";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
 
           <PrivateRoute path="/dashboard" component={DashBoard} />
 
-          <PrivateRoute path="/class-details/:id" />
+          <PrivateRoute path="/class-details/:id" children={<ClassDetails />} />
 
           <Route path="*" component={ErrorPage} />
         </Switch>

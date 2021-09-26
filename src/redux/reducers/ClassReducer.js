@@ -2,7 +2,7 @@ let initialState = {
   classes: [],
 };
 
-const setClassReducer = (state = initialState, { type, payload }) => {
+export const setClassReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case "SET_CLASSES":
       return { ...state, classes: payload };
@@ -10,5 +10,3 @@ const setClassReducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
-
-export default setClassReducer;

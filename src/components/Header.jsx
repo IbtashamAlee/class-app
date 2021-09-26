@@ -28,12 +28,12 @@ const Header = ({ addClass }) => {
         <Link to="/dashboard" className=" text-decoration-none p-1">
           <span className="mt-2 text-white logo display-5">Class Manager</span>
         </Link>
-        <div className="d-flex">
+        <div className="d-flex justify-content-center align-items-center">
           <button className="btn text-white" onClick={toggleForm}>
             <h3>+</h3>
           </button>
           <br />
-          <div className="dropdown-btn mt-2">
+          <div className="dropdown-btn">
             <button className="btn text-white" onClick={menu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const Header = ({ addClass }) => {
               </svg>
             </button>
             {dropdown && (
-              <div className="position-absolute border text-dark d-flex flex-column text-decoration-none mt-3 px-3">
+              <div className="position-absolute border text-dark d-flex flex-column bg-white text-decoration-none mt-3 px-3">
                 <div className="d-block btn px-3 py-2 border-bottom">
                   Profile
                 </div>

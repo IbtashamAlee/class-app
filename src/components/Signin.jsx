@@ -96,7 +96,7 @@ const Signin = () => {
             }}
             type="submit"
           >
-            Sign in
+            Sign In
           </button>
         </form>
       </div>

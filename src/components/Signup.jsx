@@ -125,7 +125,7 @@ const Signup = () => {
             }}
             type="submit"
           >
-            Sign up
+            Sign Up
           </button>
         </form>
       </div>

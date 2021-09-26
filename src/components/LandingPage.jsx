@@ -25,7 +25,7 @@ const LandingPage = () => {
               borderRadius: "10px",
             }}
           >
-            sign in
+            Sign In
           </Link>
 
           <br />
@@ -45,7 +45,7 @@ const LandingPage = () => {
               borderRadius: "10px",
             }}
           >
-            sign up
+            Sign Up
           </Link>
         </div>
       </div>
